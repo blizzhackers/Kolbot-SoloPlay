@@ -7,16 +7,46 @@
 
 includeIfNotIncluded("core/experience.js");
 includeIfNotIncluded("SoloPlay/Tools/Developer.js");
-includeIfNotIncluded("SoloPlay/Functions/PrototypeOverrides.js");
 
 const Tracker = {
   GTPath: "libs/SoloPlay/Data/" + me.profile + "/" + me.profile + "-GameTime.json",
   LPPath: "libs/SoloPlay/Data/" + me.profile + "/" + me.profile + "-LevelingPerformance.csv",
   SPPath: "libs/SoloPlay/Data/" + me.profile + "/" + me.profile + "-ScriptPerformance.csv",
   // Leveling Performance
-  LPHeader: "Total Time,InGame,Split Time,Area,Charlevel,Gained EXP,EXP/Minute,Difficulty,Gold,Fire Resist,Cold Resist,Light Resist,Poison Resist,Current Build" + "\n",
+  LPHeader: [
+    "Total Time",
+    "InGame",
+    "Split Time",
+    "Area",
+    "Charlevel",
+    "Gained EXP",
+    "EXP/Minute",
+    "Difficulty",
+    "Gold",
+    "Fire Resist",
+    "Cold Resist",
+    "Light Resist",
+    "Poison Resist",
+    "Current Build"
+  ].join(",") + "\n",
   // Script Performance
-  SPHeader: "Total Time,InGame,Sequence,Script,Charlevel,Gained EXP,EXP/Minute,EXP Gain %,Difficulty,Gold,Fire Resist,Cold Resist,Light Resist,Poison Resist,Current Build" + "\n",
+  SPHeader: [
+    "Total Time",
+    "InGame",
+    "Sequence",
+    "Script",
+    "Charlevel",
+    "Gained EXP",
+    "EXP/Minute",
+    "EXP Gain %",
+    "Difficulty",
+    "Gold",
+    "Fire Resist",
+    "Cold Resist",
+    "Light Resist",
+    "Poison Resist",
+    "Current Build"
+  ].join(",") + "\n",
   tick: 0,
   /**
    * @typedef {Object} GameTracker
