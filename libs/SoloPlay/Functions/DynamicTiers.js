@@ -599,7 +599,7 @@
     tier += ctcScore();
     tier += chargeditemscore(item, -1, buildInfo);
 
-    if (tier > 1 && tier < NTIP.MAX_TIER && NTIP.CheckItem(item, NTIP.FinalGear) === Pickit.Result.WANTED) {
+    if (tier > 1 && tier < 50000 /* NTIP.MAX_TIER */ && NTIP.CheckItem(item, NTIP.FinalGear) === Pickit.Result.WANTED) {
       // console.debug(item.prettyPrint + "~~~" + tier);
       tier += NTIP.MAX_TIER;
     }
