@@ -64,7 +64,11 @@
       });
     
     me.getItemsEx()
-      .filter(item => item.isInInventory && sdk.quest.items.includes(item.classid))
+      .filter(item => (
+        item.isInInventory
+        && sdk.quest.items.includes(item.classid)
+        && item.classid !== sdk.quest.item.Cube
+      ))
       .forEach(item => {
         Quest.stashItem(item);
       });
