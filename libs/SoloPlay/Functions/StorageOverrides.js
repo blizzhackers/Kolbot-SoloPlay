@@ -132,6 +132,11 @@ includeIfNotIncluded("SoloPlay/Tools/Developer.js");
       return true;
     }
 
+    // If cube is in locked inventory spot, don't touch it
+    if (cube && cube.isInInventory && Storage.Inventory.IsLocked(cube, Config.Inventory)) {
+      return true;
+    }
+
     let makeCubeSpot = this.MakeSpot(cube, { x: 0, y: 0 }, true); // NOTE: passing these in buffer order [h/x][w/y]
 
     if (makeCubeSpot) {
@@ -173,7 +178,11 @@ includeIfNotIncluded("SoloPlay/Tools/Developer.js");
 
         let item = this.itemList[this.buffer[x][y] - 1];
 
-        if (item.classid === sdk.quest.item.Cube && item.isInStash && item.x === 0 && item.y === 0) {
+        if (item.classid === sdk.quest.item.Cube
+          && (
+            (item.isInInventory && Storage.Inventory.IsLocked(item, Config.Inventory))
+            || (item.isInStash && item.x === 0 && item.y === 0)
+          )) {
           continue; // dont touch the cube
         }
 
