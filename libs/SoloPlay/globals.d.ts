@@ -508,6 +508,7 @@ declare global {
     function nextDifficulty(announce: boolean): string | false;
     function runes(): boolean;
     function haveItem(type: string | number, flag?: string | number, iName?: string): boolean;
+    function itemSocketables(type: string | number, quality: string | number, iName?: string): boolean;
     function currentBuild(): Build;
     function finalBuild(): Build;
   }
