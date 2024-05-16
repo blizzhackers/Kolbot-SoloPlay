@@ -972,9 +972,10 @@ Item.logItem = function (action, unit, keptLine, force) {
     desc += ("\n\\xffc0Line: " + keptLine);
   }
   desc += "$" + (unit.getFlag(sdk.items.flags.Ethereal) ? ":eth" : "");
+  const formattedDate = new Date().dateStamp().replace(/\//g, "-");
 
   const itemObj = {
-    title: (new Date().dateStamp() + " ") + action + " " + name,
+    title: formattedDate + " " + action.replace(/ÿc[0-9!"+<:;.*]|\/|\\/g, "").trim() + " " + name,
     description: desc,
     image: code,
     textColor: unit.quality,
