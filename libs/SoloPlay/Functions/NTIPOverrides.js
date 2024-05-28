@@ -631,7 +631,7 @@ NTIP.ParseLineInt = function (input, info) {
           
           return false;
         }
-        p_result[0] += _props.get(property);
+        p_result[0] += NTIP._props.get(property);
       }
 
       for (p_start = p_end; p_end < p_section[i].length; p_end += 1) {
