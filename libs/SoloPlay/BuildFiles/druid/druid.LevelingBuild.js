@@ -46,7 +46,8 @@
       AutoBuildTemplate: {
         1:	{
           Update: function () {
-            Config.AttackSkill = [-1, sdk.skills.Tornado, -1, sdk.skills.Tornado, -1, sdk.skills.ArticBlast, -1];
+            Config.SkipImmune = ["cold and physical"];
+            Config.AttackSkill = [-1, sdk.skills.Tornado, -1, sdk.skills.Tornado, -1, sdk.skills.ArcticBlast, -1];
             Config.LowManaSkill = [-1, -1];
             Config.SummonAnimal = "Grizzly";
             Config.SummonSpirit = "Oak Sage";
