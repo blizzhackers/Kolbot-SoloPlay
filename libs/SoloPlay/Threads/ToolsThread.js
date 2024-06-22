@@ -309,6 +309,7 @@ function main () {
    */
   const keyEvent = function (key) {
     switch (key) {
+    case sdk.keys.F10:
     case sdk.keys.PauseBreak: // pause default.dbj
       togglePause();
 

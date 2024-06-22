@@ -594,33 +594,12 @@ NTIP.ParseLineInt = function (input, info) {
     return null;
   }
 
-  const _props = new Map([
-    ["wsm", 'getBaseStat("items", item.classid, "speed")'],
-    ["weaponspeed", 'getBaseStat("items", item.classid, "speed")'],
-    ["minimumsockets", 'getBaseStat("items", item.classid, "gemsockets")'],
-    ["strreq", "item.strreq"],
-    ["dexreq", "item.dexreq"],
-    ["2handed", 'getBaseStat("items", item.classid, "2handed")'],
-    ["color", "item.getColor()"],
-    ["type", "item.itemType"],
-    ["name", "item.classid"],
-    ["classid", "item.classid"],
-    ["class", "item.itemclass"],
-    ["quality", "item.quality"],
-    ["level", "item.ilvl"],
-    ["europe", '("' + me.realm.toLowerCase() + '"===" europe")'],
-    ["uswest", '("' + me.realm.toLowerCase() + '"===" uswest")'],
-    ["useast", '("' + me.realm.toLowerCase() + '"===" useast")'],
-    ["asia", '("' + me.realm.toLowerCase() + '"===" asia")'],
-    ["ladder", "me.ladder"],
-    ["hardcore", "(!!me.playertype)"],
-    ["classic", "(!me.gametype)"],
-    ["distance", "(item.onGroundOrDropping && item.distance || Infinity)"],
-  ]);
-
   let p_result = input.split("#");
 
   if (p_result[0] && p_result[0].length > 4) {
+    if (NTIP.parseAliasIn.test(p_result[0])) {
+      p_result[0] = NTIP.parseAliasIn.convert(p_result[0]);
+    }
     p_section = p_result[0].split("[");
 
     p_result[0] = p_section[0];
@@ -629,44 +608,30 @@ NTIP.ParseLineInt = function (input, info) {
       p_end = p_section[i].indexOf("]") + 1;
       property = p_section[i].substring(0, p_end - 1);
 
+      if (NTIP._aliases.has(property)) {
+        property = NTIP._aliases.get(property);
+      }
+
       switch (property) {
       case "flag":
-        if (p_section[i][p_end] === "!") {
-          p_result[0] += "!item.getFlag(";
-        } else {
-          p_result[0] += "item.getFlag(";
-        }
-
-        p_end += 2;
-
-        break;
       case "prefix":
-        if (p_section[i][p_end] === "!") {
-          p_result[0] += "!item.getPrefix(";
-        } else {
-          p_result[0] += "item.getPrefix(";
-        }
-
-        p_end += 2;
-
-        break;
       case "suffix":
         if (p_section[i][p_end] === "!") {
-          p_result[0] += "!item.getSuffix(";
+          p_result[0] += "!" + NTIP._props.get(property);
         } else {
-          p_result[0] += "item.getSuffix(";
+          p_result[0] += NTIP._props.get(property);
         }
 
         p_end += 2;
 
         break;
       default:
-        if (!_props.has(property)) {
+        if (!NTIP._props.has(property)) {
           Misc.errorReport("Unknown property: " + property + " File: " + info.file + " Line: " + info.line);
           
           return false;
         }
-        p_result[0] += _props.get(property);
+        p_result[0] += NTIP._props.get(property);
       }
 
       for (p_start = p_end; p_end < p_section[i].length; p_end += 1) {
@@ -694,57 +659,19 @@ NTIP.ParseLineInt = function (input, info) {
       if (isNaN(p_keyword)) {
         try {
           switch (property) {
-          case "color":
-            if (NTIPAliasColor[p_keyword] === undefined) {
-              throw new Error("Unknown color: " + p_keyword + " File: " + info.file + " Line: " + info.line);
-            }
-
-            p_result[0] += NTIPAliasColor[p_keyword];
-
-            break;
-          case "type":
-            if (NTIPAliasType[p_keyword] === undefined) {
-              throw new Error("Unknown type: " + p_keyword + " File: " + info.file + " Line: " + info.line);
-            }
-
-            p_result[0] += NTIPAliasType[p_keyword];
-
-            break;
-          case "name":
-            if (NTIPAliasClassID[p_keyword] === undefined) {
-              throw new Error("Unknown name: " + p_keyword + " File: " + info.file + " Line: " + info.line);
-            }
-
-            p_result[0] += NTIPAliasClassID[p_keyword];
-
-            break;
-          case "class":
-            if (NTIPAliasClass[p_keyword] === undefined) {
-              throw new Error("Unknown class: " + p_keyword + " File: " + info.file + " Line: " + info.line);
-            }
-
-            p_result[0] += NTIPAliasClass[p_keyword];
-
-            break;
-          case "quality":
-            if (NTIPAliasQuality[p_keyword] === undefined) {
-              throw new Error("Unknown quality: " + p_keyword + " File: " + info.file + " Line: " + info.line);
-            }
-
-            p_result[0] += NTIPAliasQuality[p_keyword];
-
-            break;
-          case "flag":
-            if (NTIPAliasFlag[p_keyword] === undefined) {
-              throw new Error("Unknown flag: " + p_keyword + " File: " + info.file + " Line: " + info.line);
-            }
-
-            p_result[0] += NTIPAliasFlag[p_keyword] + ")";
-
-            break;
           case "prefix":
           case "suffix":
             p_result[0] += "\"" + p_keyword + "\")";
+
+            break;
+          default:
+            if (!NTIP._lists.has(property)) {
+              throw new Error("Unknown property: " + property + " File: " + info.file + " Line: " + info.line);
+            } else if (NTIP._lists.get(property)[p_keyword] === undefined) {
+              throw new Error("Unknown " + property + ": " + p_keyword + " File: " + info.file + " Line: " + info.line);
+            }
+            p_result[0] += NTIP._lists.get(property)[p_keyword];
+            property === "flag" && (p_result[0] += ")");
 
             break;
           }

@@ -24,7 +24,7 @@
         [sdk.skills.Howl, 9],
         [sdk.skills.BattleOrders, 20],
         [sdk.skills.BattleCommand, 1],
-        [sdk.skills.ThrowMastery, 20],
+        [sdk.skills.ThrowingMastery, 20],
         [sdk.skills.NaturalResistance, 5],
         [sdk.skills.DoubleSwing, 20],
         [sdk.skills.Frenzy, 1],
@@ -37,8 +37,14 @@
           max: 4,
           have: [],
           classid: sdk.items.SmallCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
-            return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.MaxHp) === 20);
+            return (
+              !check.unique
+              && check.classid === this.classid
+              && check.allRes === 5
+              && check.getStat(sdk.stats.MaxHp) === 20
+            );
           }
         },
 
@@ -46,8 +52,14 @@
           max: 4,
           have: [],
           classid: sdk.items.SmallCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
-            return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.FHR) === 5);
+            return (
+              !check.unique
+              && check.classid === this.classid
+              && check.allRes === 5
+              && check.getStat(sdk.stats.FHR) === 5
+            );
           }
         },
 
@@ -55,9 +67,14 @@
           max: 1,
           have: [],
           classid: sdk.items.GrandCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
-            return (!check.unique && check.classid === this.classid && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.BarbCombat) === 1
-              && check.getStat(sdk.stats.MaxHp) >= 40);
+            return (
+              !check.unique
+              && check.classid === this.classid
+              && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.BarbCombat) === 1
+              && check.getStat(sdk.stats.MaxHp) >= 40
+            );
           }
         },
 
@@ -65,9 +82,14 @@
           max: 1,
           have: [],
           classid: sdk.items.GrandCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
-            return (!check.unique && check.classid === this.classid && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.Masteries) === 1
-              && check.getStat(sdk.stats.MaxHp) >= 40);
+            return (
+              !check.unique
+              && check.classid === this.classid
+              && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.Masteries) === 1
+              && check.getStat(sdk.stats.MaxHp) >= 40
+            );
           }
         },
       },
@@ -75,7 +97,13 @@
       AutoBuildTemplate: {
         1:	{
           Update: function () {
-            Config.AttackSkill = [-1, sdk.skills.DoubleThrow, sdk.skills.Frenzy, sdk.skills.DoubleThrow, sdk.skills.Berserk];
+            Config.AttackSkill = [
+              -1,
+              sdk.skills.DoubleThrow,
+              sdk.skills.Frenzy,
+              sdk.skills.DoubleThrow,
+              sdk.skills.Berserk
+            ];
             Config.LowManaSkill = [sdk.skills.DoubleSwing, sdk.skills.DoubleSwing];
             Config.BeltColumn = ["hp", "hp", "mp", "rv"];
           }
@@ -85,9 +113,11 @@
       respec: function () {
         if (me.classic) {
           return false;
-        } else {
-          return Check.haveItem("throwingknife", "unique", "Warshrike") && Check.haveItem("throwingaxe", "unique", "Lacerator");
         }
+        return (
+          me.checkItem({ name: sdk.locale.items.Warshrike, }).have
+          && me.checkItem({ name: sdk.locale.items.Lacerator, }).have
+        );
       },
 
       active: function () {
@@ -121,7 +151,7 @@
       "[type] == ring && [quality] == unique # [dexterity] >= 15 && [tohit] >= 150 # [tier] == 100000",
       "[type] == ring && [quality] == unique # [maxstamina] == 50 && [lifeleech] >= 3 # [tier] == 100000",
       // Switch - BO sticks
-      "([type] == club || [type] == sword || [type] == knife || [type] == throwingknife || [type] == mace) && ([quality] == magic || [flag] == runeword) && [2handed] == 0 # [itemallskills]+[warcriesskilltab]+[barbarianskills] >= 1 # [secondarytier] == 100000 + secondaryscore(item)",
+      "[type] >= 1 && ([quality] == magic || [flag] == runeword) && [2handed] == 0 # [itemallskills]+[warcriesskilltab]+[barbarianskills] >= 1 # [secondarytier] == 100000 + secondaryscore(item)",
       // Merc Armor - Fortitude
       "[type] == armor && [flag] == runeword # [enhanceddefense] >= 200 && [enhanceddamage] >= 300 # [merctier] == 100000",
       // Merc Final Helmet - Eth Andy's

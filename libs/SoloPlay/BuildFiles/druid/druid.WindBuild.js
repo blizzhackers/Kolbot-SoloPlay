@@ -34,6 +34,7 @@
           max: 3,
           have: [],
           classid: sdk.items.SmallCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
             return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.MaxHp) === 20);
           }
@@ -43,6 +44,7 @@
           max: 2,
           have: [],
           classid: sdk.items.SmallCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
             return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.MagicBonus) === 7);
           }
@@ -52,6 +54,7 @@
           max: 1,
           have: [],
           classid: sdk.items.SmallCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
             return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.FHR) === 5);
           }
@@ -61,6 +64,7 @@
           max: 2,
           have: [],
           classid: sdk.items.GrandCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
             return (!check.unique && check.classid === this.classid && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.Elemental) === 1
               && check.getStat(sdk.stats.MaxHp) >= 40);
@@ -71,7 +75,8 @@
       AutoBuildTemplate: {
         1:	{
           Update: function () {
-            Config.AttackSkill = [-1, sdk.skills.Tornado, -1, sdk.skills.Tornado, -1, sdk.skills.ArticBlast, -1];
+            Config.SkipImmune = ["cold and physical"];
+            Config.AttackSkill = [-1, sdk.skills.Tornado, -1, sdk.skills.Tornado, -1, sdk.skills.ArcticBlast, -1];
             Config.LowManaSkill = [-1, -1];
             Config.SummonAnimal = "Grizzly";
             Config.SummonSpirit = "Oak Sage";
@@ -80,7 +85,7 @@
       },
 
       respec: function () {
-        return Check.haveItem("armor", "runeword", "Enigma");
+        return me.checkItem({ name: sdk.locale.items.Enigma, itemtype: sdk.items.type.Armor }).have;
       },
 
       active: function () {

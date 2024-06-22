@@ -55,6 +55,14 @@
     ],
   };
   
+  /**
+   * @param {number} classid 
+   * @param {number[]} socketWith 
+   * @param {number[]} temp 
+   * @param {boolean} useSocketQuest 
+   * @param {(item?: ItemUnit) => boolean | void} condition 
+   * @returns {{ classid: number, socketWith: number[], temp: number[], useSocketQuest: boolean, condition: (item?: ItemUnit) => boolean | void }}
+   */
   const addSocketableObj = (classid, socketWith = [], temp = [], useSocketQuest = false, condition = () => {}) => ({
     classid: classid,
     socketWith: socketWith,
@@ -83,7 +91,7 @@
   // Moser's
   basicSocketables.caster
     .push(addSocketableObj(sdk.items.RoundShield, [sdk.items.runes.Um], [sdk.items.gems.Perfect.Diamond],
-      false, (item) => item.unique && !item.ethereal
+      false, (item) => item.unique && !item.ethereal && me.equipped.get(sdk.body.LeftArm).tier < NTIP.MAX_TIER
     ));
   // Spirit Forge
   basicSocketables.caster

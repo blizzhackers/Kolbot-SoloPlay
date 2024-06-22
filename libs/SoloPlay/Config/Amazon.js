@@ -186,7 +186,7 @@
       }
 
       if (SetUp.finalBuild === "Wfzon") {
-        if (!Check.haveItem(sdk.items.HydraBow, "unique", "Windforce")) {
+        if (!me.checkItem({ name: sdk.locale.items.Windforce, classid: sdk.items.HydraBow }).have) {
           NTIP.addLine("[name] == hydrabow && [quality] == unique # [manaleech] >= 6 # [maxquantity] == 1");
         }
 
@@ -203,11 +203,15 @@
         includeIfNotIncluded("SoloPlay/BuildFiles/Runewords/Faith.js");
       }
         
-      if (!Check.haveItem(sdk.items.DiamondBow, "unique", "Witchwild String")
+      if (!me.checkItem({ name: sdk.locale.items.WitchwildString, classid: sdk.items.DiamondBow }).have
         && (SetUp.finalBuild === "Witchyzon" || ["Wfzon", "Faithbowzon"].indexOf(SetUp.currentBuild) === -1)) {
         NTIP.addLine("[name] == shortsiegebow && [quality] == unique # [fireresist] == 40 # [maxquantity] == 1");
         // Witchyzon only - keep the bow but don't upgrade it until we have our wanted belt
-        if ((SetUp.finalBuild === "Witchyzon" && Check.haveItem("vampirefangbelt", "unique", "Nosferatu's Coil")) || ["Wfzon", "Faithbowzon"].includes(SetUp.finalBuild)) {
+        if (["Wfzon", "Faithbowzon"].includes(SetUp.finalBuild)
+          || (
+            SetUp.finalBuild === "Witchyzon"
+            && me.checkItem({ name: sdk.locale.items.NosferatusCoil }).have
+          )) {
           Config.Recipes.push([Recipe.Unique.Weapon.ToElite, "Short Siege Bow", Roll.NonEth]);
         }
       }

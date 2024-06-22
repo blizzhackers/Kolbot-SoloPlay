@@ -666,12 +666,13 @@ const SoloIndex = {
       },
       shouldRun: function () {
         if (!this.preReq() || this.skipIf()) return false;
-        switch (true) {
-        case !me.diablo:
-        case (me.normal && me.classic):
-        case (me.normal && me.expansion && (me.charlvl < 30 || !me.diffCompleted)):
-        case (me.nightmare && (Pather.canTeleport() || me.charlvl <= 65)):
-        case (me.hell):
+        if (!me.diablo) return true;
+        if (me.normal) {
+          if (me.classic || me.charlvl < 30) return true;
+          return !me.diffCompleted && me.data.finalBuild !== "Bumper";
+        } else if (me.nightmare) {
+          return (Pather.canTeleport() || me.charlvl <= 65);
+        } else if (me.hell) {
           return true;
         }
         return false;

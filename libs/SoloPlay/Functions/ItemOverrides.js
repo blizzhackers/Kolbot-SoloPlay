@@ -66,7 +66,7 @@ Item.getBodyLoc = function (item) {
   if (Item.shieldTypes.includes(item.itemType)) return [sdk.body.LeftArm];
   if (Item.helmTypes.includes(item.itemType)) return [sdk.body.Head];
   if (Item.weaponTypes.includes(item.itemType)) {
-    return me.barbarian && item.twoHanded && !item.strictlyTwoHanded
+    return me.barbarian && (!item.twoHanded || (item.twoHanded && !item.strictlyTwoHanded))
       ? [sdk.body.RightArm, sdk.body.LeftArm]
       : [sdk.body.RightArm];
   }
@@ -494,7 +494,7 @@ Item.getSecondaryBodyLoc = function (item) {
       : [sdk.body.RightArmSecondary];
   }
   if (Item.weaponTypes.includes(item.itemType)) {
-    return me.barbarian && item.twoHanded && !item.strictlyTwoHanded
+    return me.barbarian && (!item.twoHanded || (item.twoHanded && !item.strictlyTwoHanded))
       ? [sdk.body.RightArmSecondary, sdk.body.LeftArmSecondary]
       : [sdk.body.RightArmSecondary];
   }
@@ -887,13 +887,26 @@ Item.removeItemsMerc = function () {
  */
 Item.logItem = function (action, unit, keptLine, force) {
   if (!this.useItemLog || unit === undefined || !unit || !unit.fname) return false;
-  if (!Config.LogKeys && ["pk1", "pk2", "pk3"].includes(unit.code)) return false;
-  if (!Config.LogOrgans && ["dhn", "bey", "mbr"].includes(unit.code)) return false;
-  if (!Config.LogLowRunes && ["r01", "r02", "r03", "r04", "r05", "r06", "r07", "r08", "r09", "r10", "r11", "r12", "r13", "r14"].includes(unit.code)) return false;
-  if (!Config.LogMiddleRunes && ["r15", "r16", "r17", "r18", "r19", "r20", "r21", "r22", "r23"].includes(unit.code)) return false;
-  if (!Config.LogHighRunes && ["r24", "r25", "r26", "r27", "r28", "r29", "r30", "r31", "r32", "r33"].includes(unit.code)) return false;
-  if (!Config.LogLowGems && ["gcv", "gcy", "gcb", "gcg", "gcr", "gcw", "skc", "gfv", "gfy", "gfb", "gfg", "gfr", "gfw", "skf", "gsv", "gsy", "gsb", "gsg", "gsr", "gsw", "sku"].includes(unit.code)) return false;
-  if (!Config.LogHighGems && ["gzv", "gly", "glb", "glg", "glr", "glw", "skl", "gpv", "gpy", "gpb", "gpg", "gpr", "gpw", "skz"].includes(unit.code)) return false;
+  
+  const keys = ["pk1", "pk2", "pk3"];
+  const organs = ["dhn", "bey", "mbr"];
+  const lowRunes = ["r01", "r02", "r03", "r04", "r05", "r06", "r07", "r08", "r09", "r10", "r11", "r12", "r13", "r14"];
+  const middleRunes = ["r15", "r16", "r17", "r18", "r19", "r20", "r21", "r22", "r23"];
+  const highRunes = ["r24", "r25", "r26", "r27", "r28", "r29", "r30", "r31", "r32", "r33"];
+  const lowGems = [
+    "gcv", "gcy", "gcb", "gcg", "gcr",
+    "gcw", "skc", "gfv", "gfy", "gfb",
+    "gfg", "gfr", "gfw", "skf", "gsv",
+    "gsy", "gsb", "gsg", "gsr", "gsw", "sku"
+  ];
+  const highGems = ["gzv", "gly", "glb", "glg", "glr", "glw", "skl", "gpv", "gpy", "gpb", "gpg", "gpr", "gpw", "skz"];
+  if (!Config.LogKeys && keys.includes(unit.code)) return false;
+  if (!Config.LogOrgans && organs.includes(unit.code)) return false;
+  if (!Config.LogLowRunes && lowRunes.includes(unit.code)) return false;
+  if (!Config.LogMiddleRunes && middleRunes.includes(unit.code)) return false;
+  if (!Config.LogHighRunes && highRunes.includes(unit.code)) return false;
+  if (!Config.LogLowGems && lowGems.includes(unit.code)) return false;
+  if (!Config.LogHighGems && highGems.includes(unit.code)) return false;
 
   for (let skipCode of Config.SkipLogging) {
     if (skipCode === unit.classid || skipCode === unit.code) return false;
@@ -959,9 +972,10 @@ Item.logItem = function (action, unit, keptLine, force) {
     desc += ("\n\\xffc0Line: " + keptLine);
   }
   desc += "$" + (unit.getFlag(sdk.items.flags.Ethereal) ? ":eth" : "");
+  const formattedDate = new Date().dateStamp().replace(/\//g, "-");
 
-  let itemObj = {
-    title: action + " " + name,
+  const itemObj = {
+    title: formattedDate + " " + action.replace(/ÿc[0-9!"+<:;.*]|\/|\\/g, "").trim() + " " + name,
     description: desc,
     image: code,
     textColor: unit.quality,

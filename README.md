@@ -101,6 +101,14 @@ In expansion, it transitions to the final build when final gear requirements are
 
 **A:** A Bumper is a level 40 character that has not done baal quest in normal and is used to "bump" low level characters to hell difficulty where they can power level following chaos runs. 
 
+### **Q: Can I enable my own Pickit files?**
+
+**A:** Yes, similar to how core kolbot works open the class config file located `libs\SoloPlay\Config\` and look for the section header.
+
+`/* Pickit configuration. */`
+
+add your pickit files here or uncomment the kolton nip already present.
+
 ### **Q: Does this work for Diablo 2 Resurected?**
 
 **A:** No, Kolbot does not work with d2r and SoloPlay runs using Kolbot. SoloPlay only works on diablo 2. 
@@ -118,7 +126,7 @@ In expansion, it transitions to the final build when final gear requirements are
 |:------:|:-------|-------:|
 | 1.| Download Kolbot here: [github.com/blizzhackers/kolbot](https://github.com/blizzhackers/kolbot). |![blizzhackers github](https://i.imgur.com/RksqKEA.jpg) |
 | 2.| Click the green button to Download SoloPlay. |![enter image description here](https://i.imgur.com/cNqZDbW.jpg) |
-| 3.a| Copy and paste the following: `default.dbj`, `D2BotSoloPlay.dbj`, and the entire `\libs` folder into `\d2bs\kolbot\`.| ![kolbot](https://i.imgur.com/WNxJOhq.png) |
+| 3.a| Copy and paste the following: `D2BotSoloPlay.dbj`, and the entire `\libs` folder into `\d2bs\kolbot\`.| ![kolbot](https://i.imgur.com/WNxJOhq.png) |
 |3.b|A successful installation will show 1 new file in the folder: `D2BotSoloPlay.dbj` and look similar to the following image|![image](https://github.com/blizzhackers/kolbot-SoloPlay/assets/60308670/a85713f4-df22-4aa8-937d-21cba4366b0c)
 | 4.| Select Add for new a Kolbot Profile. | ![Add-profile.jpg](https://imgur.com/tHs9ZoH.jpg)|
 | 4.a| Select and Input a profile name. See the **[Possible Profile Name Choices](#possible-profile-names)** below for a list of available options. | ![extract into](https://i.imgur.com/2YcGKVH.png) |
@@ -198,6 +206,10 @@ https://discord.gg/5pjTC2zH6N
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ![Kolbot-SoloPlay Paladin](https://user-images.githubusercontent.com/60308670/165398785-8ef1afd7-d232-4bc4-a23e-a1f1321ce0ed.png)
+
+<a href="https://www.buymeacoffee.com/thebguy" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>
 
 [![Donate](https://img.shields.io/badge/PayPal-Donate-blue.svg?style=for-the-badge&logo=paypal)](https://www.paypal.com/donate/?business=Y9S4AWX9QUZXW&no_recurring=0&currency_code=USD)
 

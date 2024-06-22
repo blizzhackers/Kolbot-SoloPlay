@@ -35,6 +35,7 @@
           max: 3,
           have: [],
           classid: sdk.items.SmallCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
             return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.MaxHp) === 20);
           }
@@ -44,6 +45,7 @@
           max: 2,
           have: [],
           classid: sdk.items.SmallCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
             return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.MagicBonus) === 7);
           }
@@ -53,6 +55,7 @@
           max: 1,
           have: [],
           classid: sdk.items.SmallCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
             return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.FHR) === 5);
           }
@@ -62,6 +65,7 @@
           max: 2,
           have: [],
           classid: sdk.items.GrandCharm,
+          /** @param {ItemUnit} check */
           stats: function (check) {
             return (!check.unique && check.classid === this.classid && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.Warcries) === 1
               && check.getStat(sdk.stats.MaxHp) >= 40);
@@ -111,7 +115,7 @@
       // Rings - SoJ
       "[type] == ring && [quality] == unique # [itemmaxmanapercent] == 25 # [tier] == 100000",
       // Switch - BO sticks
-      "([type] == club || [type] == sword || [type] == knife || [type] == throwingknife || [type] == mace) && ([quality] == magic || [flag] == runeword) && [2handed] == 0 # [itemallskills]+[warcriesskilltab]+[barbarianskills] >= 1 # [secondarytier] == 100000 + secondaryscore(item)",
+      "[type] >= 1 && ([quality] == magic || [flag] == runeword) && [2handed] == 0 # [itemallskills]+[warcriesskilltab]+[barbarianskills] >= 1 # [secondarytier] == 100000 + secondaryscore(item)",
       // Merc Armor - Fortitude
       "[type] == armor && [flag] == runeword # [enhanceddefense] >= 200 && [enhanceddamage] >= 300 # [merctier] == 100000",
       // Merc Final Helmet - Eth Andy's

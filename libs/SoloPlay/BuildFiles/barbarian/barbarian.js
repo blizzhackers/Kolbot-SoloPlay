@@ -8,7 +8,7 @@
 const CharInfo = {
   respecOne: me.expansion ? 30 : 30,
   respecTwo: me.expansion ? 74 : 74,
-  levelCap: (function() {
+  levelCap: (function () {
     const currentDiff = sdk.difficulty.nameOf(me.diff);
     const softcoreMode = {
       "Normal": me.expansion ? 33 : 33,
@@ -28,12 +28,18 @@ const CharInfo = {
     const nSkills = me.getStat(sdk.stats.NewSkills);
     const currLevel = me.charlvl;
     const justRepeced = (nSkills >= currLevel);
+    const { respecOne, respecTwo } = this;
 
     switch (true) {
-    case currLevel < this.respecOne && !me.checkSkill(sdk.skills.WarCry, sdk.skills.subindex.HardPoints):
+    case currLevel < respecOne && !me.checkSkill(sdk.skills.WarCry, sdk.skills.subindex.HardPoints):
       return "Start";
-    case currLevel >= this.respecOne && currLevel < this.respecTwo && justRepeced:
-    case currLevel >= this.respecOne && currLevel < this.respecTwo && me.checkSkill(sdk.skills.NaturalResistance, sdk.skills.subindex.HardPoints) && !me.checkSkill(sdk.skills.Berserk, sdk.skills.subindex.HardPoints):
+    case currLevel >= respecOne && currLevel < respecTwo && justRepeced:
+    case (
+      currLevel >= respecOne
+      && currLevel < respecTwo
+      && me.checkSkill(sdk.skills.NaturalResistance, sdk.skills.subindex.HardPoints)
+      && !me.checkSkill(sdk.skills.Berserk, sdk.skills.subindex.HardPoints)
+    ):
       return "Stepping";
     case Check.finalBuild().respec() && justRepeced:
     case Check.finalBuild().active():
