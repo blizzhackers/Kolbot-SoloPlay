@@ -1,8 +1,8 @@
 ![extract into](https://i.imgur.com/TcRmoRm.png)
 
-*- "the one bot to rule them all."*
+*"the one bot to rule them all."*
 
-<br />
+For a very quick kolbot+soloplay installer check out https://github.com/theBGuy/kolbot-soloplay-installer
 
 # Table of contents
 - [What is SoloPlay?](#the-big-question-what-is-kolbot-soloplay)
@@ -13,8 +13,7 @@
 - [Install-Guide](#install-guide)
 - [Extras](#extras)
 - [Discord](#discord)
-
-<br />
+- [Donate](#donate)
 
 # The big question, What is Kolbot-SoloPlay?
 - SoloPlay is a D2BS based auto-play system to level any single legacy diablo 2 character class from 1-99. That sounds like a bunch of verbage so let me break it down a bit. D2BS stands for ``Diablo 2 Botting System`` if you are familiar with Kolbot that is what you are using. SoloPlay only works for Diablo 2, so before you ask it is not for Diablo 2 Resurrected. Alright next, what is an auto-play system? In simple terms, SoloPlay works by set it and forget philosophy. It is profile driven so the only thing you need to worry about is filling out the profile with the correct format and then press start (how to set up the profile is defined below). After that it takes care of the rest, no setting up config files or settings files (like sonic or horde), ect. The goal is to be the fastest leveling system there is across all modes (classic/expansion, hardcore/softcore, ladder/non-ladder)
@@ -77,6 +76,10 @@
 **A:** In classic, the bot will switch to the final build after it defeats diablo and meets a level requirement.
 In expansion, it transitions to the final build when final gear requirements are met ``(Navigate to libs\SoloPlay\``[``BuildFiles\``](libs/SoloPlay/BuildFiles/)) and look for the file with the name of the final build you choose to see what items are needed for each build and what level is required for classic.
 
+### **Q: Where can I see what items are used in the final build I selected?**
+
+**A:** Same place as above answer ``(Navigate to libs\SoloPlay\``[``BuildFiles\``](libs/SoloPlay/BuildFiles/))
+
 ### **Q: The bot has beaten diablo (classic) / baal, so why isn't moving on to the next difficulty?**
 
 **A:** The bot will only progress once it has reached a minimum character level (``navigate to libs\SoloPlay\``[``BuildFiles``](libs/SoloPlay/BuildFiles/)``\classname\classname.js`` and see `CharInfo.levelCap` for level requirments) and will not start the next difficulty with negative resistances. If the bot is more than 5 levels higher than the minimum character level and has not reached the required resistances, it will automatically move to the next difficulty.
@@ -87,7 +90,7 @@ In expansion, it transitions to the final build when final gear requirements are
 
 ### **Q: HELP!!! There is an error when starting the bot?**
 
-**A:** There was a bad installation OR the profile settings are wrong. First verify that you using the kolbot version linked the install guide below. Next, confirm you have installed all the files into their proper locations (including overwriting the existing `default.dbj`). Finally, verify the profile name and infotag follow the format of the install guide's instructions.
+**A:** There was a bad installation OR the profile settings are wrong. First verify that you using the kolbot version linked the install guide below. Next, confirm you have installed all the files into their proper locations. Finally, verify the profile name and infotag follow the format of the install guide's instructions.
 
 ### **Q: HELP!!! The bot auto created my account and I can't find the password!**
 
@@ -124,10 +127,10 @@ add your pickit files here or uncomment the kolton nip already present.
 
 | Step | Instructions | |
 |:------:|:-------|-------:|
-| 1.| Download Kolbot here: [github.com/blizzhackers/kolbot](https://github.com/blizzhackers/kolbot). |![blizzhackers github](https://i.imgur.com/RksqKEA.jpg) |
+| 1.| Download Kolbot here: [github.com/blizzhackers/kolbot](https://github.com/blizzhackers/kolbot). |![blizzhackers github](https://github.com/user-attachments/assets/0667e3f0-06ba-4ca7-b3c4-187e0c9c289c) |
 | 2.| Click the green button to Download SoloPlay. |![enter image description here](https://i.imgur.com/cNqZDbW.jpg) |
-| 3.a| Copy and paste the following: `D2BotSoloPlay.dbj`, and the entire `\libs` folder into `\d2bs\kolbot\`.| ![kolbot](https://i.imgur.com/WNxJOhq.png) |
-|3.b|A successful installation will show 1 new file in the folder: `D2BotSoloPlay.dbj` and look similar to the following image|![image](https://github.com/blizzhackers/kolbot-SoloPlay/assets/60308670/a85713f4-df22-4aa8-937d-21cba4366b0c)
+| 3.a| Copy and paste the following: `D2BotSoloPlay.dbj`, and the entire `\libs` folder into `\d2bs\kolbot\`.| ![image](https://github.com/user-attachments/assets/b213af6f-9088-4d44-8584-889365f23b7c)|
+|3.b|A successful installation will show 1 new file in the folder: `D2BotSoloPlay.dbj` and look similar to the following image|![image](https://github.com/user-attachments/assets/d5ef5093-7045-4407-a430-136b972417ab)
 | 4.| Select Add for new a Kolbot Profile. | ![Add-profile.jpg](https://imgur.com/tHs9ZoH.jpg)|
 | 4.a| Select and Input a profile name. See the **[Possible Profile Name Choices](#possible-profile-names)** below for a list of available options. | ![extract into](https://i.imgur.com/2YcGKVH.png) |
 | 4.b| ***Optional*** Input your account name. If no name than a random account is created. | |
@@ -207,6 +210,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ![Kolbot-SoloPlay Paladin](https://user-images.githubusercontent.com/60308670/165398785-8ef1afd7-d232-4bc4-a23e-a1f1321ce0ed.png)
 
+## Donate
 <a href="https://www.buymeacoffee.com/thebguy" target="_blank">
   <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
 </a>
