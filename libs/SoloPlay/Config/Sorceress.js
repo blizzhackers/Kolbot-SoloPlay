@@ -226,12 +226,20 @@
           return !me.getOwned(wanted).length && item.ilvl >= 41 && item.isBaseType && !item.ethereal;
         }
       ));
-      Config.socketables.push(addSocketableObj(sdk.items.Shako,
-        [sdk.items.runes.Um], [sdk.items.gems.Perfect.Ruby],
-        true, (item) => item.unique && !item.ethereal
-      ));
-
+      
+      if (SetUp.finalBuild === "Lightning") {
+        Config.socketables.push(addSocketableObj(sdk.items.Shako,
+          [sdk.items.runes.Um], [sdk.items.gems.Perfect.Ruby],
+          true, (item) => item.unique && !item.ethereal
+        ));
+      } else {
+        Config.socketables.push(addSocketableObj(sdk.items.Diadem,
+          [sdk.items.runes.Um], [sdk.items.gems.Perfect.Ruby],
+          true, (item) => item.unique && !item.ethereal && item.getStat(sdk.stats.PierceLtng) === 20
+        ));
+      }
       Check.itemSockables(sdk.items.Shako, "unique", "Harlequin Crest");
+      Check.itemSockables(sdk.items.Diadem, "unique", "Griffon's Eye");
 
       break;
     case "Meteorb":

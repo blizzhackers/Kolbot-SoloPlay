@@ -1,10 +1,9 @@
 /**
-*  @filename    Sorceress.BlovaBuild.js
-*  @author      isid0re, theBGuy
-*  @desc        Blizzard + Nova based final build
-*
-*/
-
+ *  @filename    Sorceress.BlovaBuild.js
+ *  @author      isid0re, theBGuy
+ *  @desc        Blizzard + Nova based final build
+ *
+ */
 
 (function (module) {
   module.exports = (function () {
@@ -18,11 +17,13 @@
         sdk.stats.PassiveColdPierce,
         sdk.stats.PassiveColdMastery,
         sdk.stats.PassiveLightningMastery,
-        sdk.stats.PassiveLightningPierce
+        sdk.stats.PassiveLightningPierce,
       ],
       wantedMerc: MercData[sdk.skills.HolyFreeze],
       stats: [
-        ["strength", 156], ["dexterity", 35], ["vitality", "all"]
+        ["strength", 156],
+        ["dexterity", 35],
+        ["vitality", "all"],
       ],
       skills: [
         [sdk.skills.Warmth, 1],
@@ -45,8 +46,13 @@
           classid: sdk.items.SmallCharm,
           /** @param {ItemUnit} check */
           stats: function (check) {
-            return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.MaxHp) === 20);
-          }
+            return (
+              !check.unique
+              && check.classid === this.classid
+              && check.allRes === 5
+              && check.getStat(sdk.stats.MaxHp) === 20
+            );
+          },
         },
 
         ResMf: {
@@ -55,8 +61,13 @@
           classid: sdk.items.SmallCharm,
           /** @param {ItemUnit} check */
           stats: function (check) {
-            return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.MagicBonus) === 7);
-          }
+            return (
+              !check.unique
+              && check.classid === this.classid
+              && check.allRes === 5
+              && check.getStat(sdk.stats.MagicBonus) === 7
+            );
+          },
         },
 
         ResFHR: {
@@ -65,8 +76,13 @@
           classid: sdk.items.SmallCharm,
           /** @param {ItemUnit} check */
           stats: function (check) {
-            return (!check.unique && check.classid === this.classid && check.allRes === 5 && check.getStat(sdk.stats.FHR) === 5);
-          }
+            return (
+              !check.unique
+              && check.classid === this.classid
+              && check.allRes === 5
+              && check.getStat(sdk.stats.FHR) === 5
+            );
+          },
         },
 
         SkillerLight: {
@@ -75,9 +91,13 @@
           classid: sdk.items.GrandCharm,
           /** @param {ItemUnit} check */
           stats: function (check) {
-            return (!check.unique && check.classid === this.classid && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.Lightning) === 1
-              && check.getStat(sdk.stats.MaxHp) >= 40);
-          }
+            return (
+              !check.unique
+              && check.classid === this.classid
+              && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.Lightning) === 1
+              && check.getStat(sdk.stats.MaxHp) >= 40
+            );
+          },
         },
 
         SkillerCold: {
@@ -86,21 +106,33 @@
           classid: sdk.items.GrandCharm,
           /** @param {ItemUnit} check */
           stats: function (check) {
-            return (!check.unique && check.classid === this.classid && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.Cold) === 1
-              && check.getStat(sdk.stats.MaxHp) >= 40);
-          }
+            return (
+              !check.unique
+              && check.classid === this.classid
+              && check.getStat(sdk.stats.AddSkillTab, sdk.skills.tabs.Cold) === 1
+              && check.getStat(sdk.stats.MaxHp) >= 40
+            );
+          },
         },
       },
 
       AutoBuildTemplate: {
-        1:	{
+        1: {
           Update: function () {
-            Config.AttackSkill = [-1, sdk.skills.Blizzard, sdk.skills.Nova, sdk.skills.Blizzard, sdk.skills.Nova, -1, sdk.skills.IceBlast];
+            Config.AttackSkill = [
+              -1,
+              sdk.skills.Blizzard,
+              sdk.skills.Nova,
+              sdk.skills.Blizzard,
+              sdk.skills.Nova,
+              -1,
+              sdk.skills.IceBlast,
+            ];
             Config.LowManaSkill = [-1, -1];
             Config.SkipImmune = ["lightning and cold"];
             Config.HPBuffer = me.expansion ? 1 : 5;
             Config.MPBuffer = me.expansion ? 1 : 5;
-          }
+          },
         },
       },
 
@@ -108,15 +140,22 @@
         if (me.classic) {
           return me.charlvl >= 75 && me.diablo;
         } else {
-          return (Attack.checkInfinity() || (me.data.merc.gear.includes(sdk.locale.items.Infinity) && !Misc.poll(() => me.getMerc(), 200, 50)));
+          return (
+            Attack.checkInfinity()
+            || (me.data.merc.gear.includes(sdk.locale.items.Infinity) && !Misc.poll(() => me.getMerc(), 200, 50))
+          );
         }
       },
 
       active: function () {
-        return this.respec() && me.getSkill(sdk.skills.Nova, sdk.skills.subindex.HardPoints) === 20 && me.getSkill(sdk.skills.Blizzard, sdk.skills.subindex.HardPoints) >= 1;
+        return (
+          this.respec()
+          && me.getSkill(sdk.skills.Nova, sdk.skills.subindex.HardPoints) === 20
+          && me.getSkill(sdk.skills.Blizzard, sdk.skills.subindex.HardPoints) >= 1
+        );
       },
     };
-    
+
     // autoequip final gear
     let finalGear = [
       // Weapon - HotO
