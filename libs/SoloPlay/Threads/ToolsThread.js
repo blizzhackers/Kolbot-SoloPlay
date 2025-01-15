@@ -553,6 +553,12 @@ function main () {
       }
 
       break;
+    case 0x0f: // "Realm going down in %Param1 minutes."
+      {
+        let realmDownStr = getLocaleString(sdk.locale.text.RealmGoingDownInXMinutes).replace("%d", param1);
+        D2Bot.printToConsole(realmDownStr, sdk.colors.D2Bot.DarkGold);
+      }
+      break;
     }
   };
 
