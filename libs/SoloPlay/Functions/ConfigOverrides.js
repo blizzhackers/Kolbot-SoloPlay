@@ -59,3 +59,4 @@ Config.init = function (notify) {
     console.error(e3);
   }
 };
+Config.UseMerc = true;
